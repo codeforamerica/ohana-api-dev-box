@@ -77,14 +77,18 @@ Vagrant mounts that directory as _/vagrant_ within the virtual machine:
     vagrant@ohana-api-dev-box:~$ ls /vagrant
     puppet  ohana-api  README.md  Vagrantfile
 
-Bootstrap the ohana-api project in there:
-
-    vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
-    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/bootstrap
-
 We are ready to go to edit in the host, and test in the virtual machine.
 
 This workflow is convenient because in the host computer you normally have your editor of choice fine-tuned, Git configured, and SSH keys in place.
+
+### Configure the database
+
+In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`.
+
+### Bootstrap the ohana-api project in the virtual machine:
+
+    vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
+    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/bootstrap
 
 ### Set up the environment variables
 
