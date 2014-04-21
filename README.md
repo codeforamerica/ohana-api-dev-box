@@ -98,7 +98,7 @@ In `config/application.yml`, set the following environment variables so that the
 
 Verify that you can launch the app:
 
-    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rails -s p8080
+    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rails s -p 8080
 
 You should now be able to access the app on the host machine at
 http://localhost:8080
@@ -168,7 +168,7 @@ Finally, to completely wipe the virtual machine from the disk **destroying all i
 
 Please check the [Vagrant documentation](http://docs.vagrantup.com/v2/) for more information on Vagrant.
 
-## Faster Rails test suites
+## Faster test suites
 
 The default mechanism for sharing folders is convenient and works out the box in
 all Vagrant versions, but there are a couple of alternatives that are more
