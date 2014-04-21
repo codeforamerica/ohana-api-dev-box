@@ -98,6 +98,12 @@ class install_postgres {
 }
 class { 'install_postgres': }
 
+
+# --- Redis ----------------------------------------------------------------
+
+class { 'redis': }
+
+
 # --- Locale -------------------------------------------------------------------
 
 # Needed for docs generation.
