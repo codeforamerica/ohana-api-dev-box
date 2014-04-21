@@ -94,7 +94,7 @@ class install_postgres {
     ensure   => present,
     encoding => 'UTF8',
     owner    => 'ohana_api',
-    require => Class['postgresql::server']
+    require  => Pg_user['ohana_api'],
   }
 
   pg_user { 'vagrant':
