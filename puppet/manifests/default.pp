@@ -1,3 +1,4 @@
+$databases = ['ohana-api_development', 'ohana_api_test']
 $as_vagrant   = 'sudo -u vagrant -H bash -l -c'
 $home         = '/home/vagrant'
 
@@ -78,23 +79,34 @@ exec { "${as_vagrant} 'gem install bundler --no-rdoc --no-ri'":
 # --- PostgreSQL ---------------------------------------------------------------
 
 class install_postgres {
+  class { 'postgresql': }
 
   class { 'postgresql::server': }
 
-  postgresql::server::role { 'vagrant':
-    password_hash => postgresql_password('vagrant', 'mypasswd'),
+  pg_user { 'ohana_api':
+    ensure  => present,
+    password => 'ohanatest',
+    createdb => true,
+    require => Class['postgresql::server']
+  }
+
+  pg_database { $databases:
+    ensure   => present,
+    encoding => 'UTF8',
+    owner    => 'ohana_api',
+    require => Class['postgresql::server']
+  }
+
+  pg_user { 'vagrant':
+    ensure    => present,
     superuser => true,
+    require   => Class['postgresql::server']
   }
 
-  postgresql::server::db { 'ohana-api_development':
-    user     => 'ohana',
-    password => postgresql_password('ohana', 'ohanatest'),
+  package { 'libpq-dev':
+    ensure => installed
   }
 
-  postgresql::server::db { 'ohana_api_test':
-    user     => 'ohana',
-    password => postgresql_password('ohana', 'ohanatest'),
-  }
 }
 class { 'install_postgres': }
 
