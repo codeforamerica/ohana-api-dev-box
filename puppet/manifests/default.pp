@@ -75,6 +75,29 @@ exec { "${as_vagrant} 'gem install bundler --no-rdoc --no-ri'":
   require => Exec['install_ruby']
 }
 
+# --- PostgreSQL ---------------------------------------------------------------
+
+class install_postgres {
+
+  class { 'postgresql::server': }
+
+  postgresql::server::role { 'vagrant':
+    password_hash => postgresql_password('vagrant', 'mypasswd'),
+    superuser => true,
+  }
+
+  postgresql::server::db { 'ohana-api_development':
+    user     => 'ohana',
+    password => postgresql_password('ohana', 'ohanatest'),
+  }
+
+  postgresql::server::db { 'ohana_api_test':
+    user     => 'ohana',
+    password => postgresql_password('ohana', 'ohanatest'),
+  }
+}
+class { 'install_postgres': }
+
 # --- Locale -------------------------------------------------------------------
 
 # Needed for docs generation.
