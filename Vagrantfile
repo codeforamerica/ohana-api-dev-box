@@ -13,6 +13,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise32"
   config.vm.hostname = "ohana-api-dev-box"
 
+  config.vm.provider 'vmware_fusion' do |v, override|
+    override.vm.box     = 'precise64'
+    override.vm.box_url = 'http://files.vagrantup.com/precise64_vmware.box'
+  end
+
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 8080 on the guest machine.
