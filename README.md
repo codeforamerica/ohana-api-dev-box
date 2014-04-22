@@ -22,7 +22,7 @@ That's it.
 
 (If you want to use VMWare Fusion instead of VirtualBox, write `vagrant up --provider=vmware_fusion` instead of `vagrant up` when building the VM for the first time. After that, Vagrant will remember your provider choice, and you won't need to include the `provider` flag again.)
 
-If the base box is not present, `vagrant up` fetches it first. The setup itself takes about 10 minutes. After the installation has finished, you can access the virtual machine with
+If the base box is not present, `vagrant up` fetches it first. The virtual machine setup itself takes about 2 minutes and 15 seconds on my MacBook Air. After the installation has finished, you can access the virtual machine with
 
     host $ vagrant ssh
     Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic-pae i686)
@@ -89,6 +89,8 @@ In the `ohana-api` directory, you will find a file within the `config` directory
 
     vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
     vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/bootstrap
+
+This step takes about 7 minutes, mostly because it takes a while to install all the gems. Nokogiri is notorious for holding up the bundle process.
 
 ### Set up the environment variables
 
