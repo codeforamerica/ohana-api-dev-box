@@ -71,6 +71,11 @@ Just clone your ohana-api fork into the ohana-api-dev-box directory on the host 
     host $ ls
     README.md   Vagrantfile puppet
     host $ git clone git@github.com:<your username>/ohana-api.git
+    
+Alternately, if you run into permission errors on a Windows machine, use
+
+    host $ git clone https://github.com/<your username>/ohana-api.git
+    
 
 Vagrant mounts that directory as _/vagrant_ within the virtual machine:
 
@@ -83,7 +88,7 @@ This workflow is convenient because in the host computer you normally have your 
 
 ### Configure the database
 
-In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`.
+In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`, deleting the `database.yml` file that already exists.
 
 ### Bootstrap the ohana-api project in the virtual machine:
 
@@ -91,6 +96,16 @@ In the `ohana-api` directory, you will find a file within the `config` directory
     vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/bootstrap
 
 This step takes about 7 minutes, mostly because it takes a while to install all the gems. Nokogiri is notorious for holding up the bundle process.
+
+On Windows machines, you may run into errors when trying to run `script/boostrap`; if there is a `^M` in the error message it is due to the character Windows uses for line endings. An easy way to fix this is with Sublime Text: open `bootstrap` in  Sublime Text, and from the "View" menu select Line Endings > Unix.
+
+If line endings in Windows were problem for `script/bootstrap`, you will also have to fix the line endings in these files:
+
+    script/setup_db
+    script/tire
+    script/users
+    
+as well as any others that throw the same error.
 
 ### Set up the environment variables
 
