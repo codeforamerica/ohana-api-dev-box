@@ -99,7 +99,7 @@ This step takes about 7 minutes, mostly because it takes a while to install all 
 
 On Windows machines, you may run into errors when trying to run `script/boostrap`; if there is a `^M` in the error message it is due to the character Windows uses for line endings. An easy way to fix this is with Sublime Text: open `bootstrap` in  Sublime Text, and from the "View" menu select Line Endings > Unix.
 
-If line endings in Windows were problem for `script/bootstrap`, you will also have to fix the line endings in these files:
+If line endings in Windows were a problem for `script/bootstrap`, you will also have to fix the line endings in these files:
 
     script/setup_db
     script/tire
