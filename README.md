@@ -51,9 +51,6 @@ Port 8080 in the host computer is forwarded to port 8080 in the virtual machine.
 
 * Redis
 
-* Elasticsearch 1.0.1
-
-
 ## Recommended Workflow
 
 The recommended workflow is
@@ -70,12 +67,7 @@ Just clone your ohana-api fork into the ohana-api-dev-box directory on the host 
 
     host $ ls
     README.md   Vagrantfile puppet
-    host $ git clone git@github.com:<your username>/ohana-api.git
-    
-Alternately, if you run into permission errors on a Windows machine, use
-
     host $ git clone https://github.com/<your username>/ohana-api.git
-    
 
 Vagrant mounts that directory as _/vagrant_ within the virtual machine:
 
@@ -104,7 +96,7 @@ If line endings in Windows were a problem for `script/bootstrap`, you will also 
     script/setup_db
     script/tire
     script/users
-    
+
 as well as any others that throw the same error.
 
 ### Set up the environment variables

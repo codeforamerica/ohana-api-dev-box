@@ -115,22 +115,6 @@ class { 'install_postgres': }
 
 class { 'redis': }
 
-
-# --- Elasticsearch ----------------------------------------------------------------
-
-
-class { 'elasticsearch':
-  package_url => 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb',
-  java_install => true,
-  config                   => {
-    'index'                => {
-      'number_of_replicas' => '1',
-      'number_of_shards'   => '1'
-    }
-  }
-}
-
-
 # --- Locale -------------------------------------------------------------------
 
 # Needed for docs generation.
