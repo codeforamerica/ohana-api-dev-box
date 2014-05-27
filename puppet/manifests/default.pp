@@ -1,4 +1,4 @@
-$databases = ['ohana-api_development', 'ohana_api_test']
+$databases = ['ohana_api_development', 'ohana_api_test']
 $as_vagrant   = 'sudo -u vagrant -H bash -l -c'
 $home         = '/home/vagrant'
 
