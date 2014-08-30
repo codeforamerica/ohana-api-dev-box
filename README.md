@@ -1,38 +1,51 @@
-# A Virtual Machine for Ohana API Development
+ # A Virtual Machine for Ohana API Development
 
 ## Introduction
-
 This project automates the setup of a development environment for working on Ohana API. Use this virtual machine to work on a pull request with everything ready to hack and run the test suites.
 
 ## Requirements
-
 * [VirtualBox](https://www.virtualbox.org) or [VMWare Fusion](http://www.vmware.com/products/fusion)
 
 * [Vagrant 1.1+](http://vagrantup.com) (not a Ruby gem)
 
 ## How To Build The Virtual Machine
+1. **Install Vagrant**, which can be [downloaded](http://www.vagrantup.com/downloads.html) from the Vagrant site, which also provides [step-by-step installation instructions](http://docs.vagrantup.com/v2/getting-started/index.html).
 
-Building the virtual machine is this easy:
+2. **Build the VM**
 
-    host $ git clone https://github.com/codeforamerica/ohana-api-dev-box.git
-    host $ cd ohana-api-dev-box
-    host $ vagrant up
+  In the directory you want to work in, enter the following:
 
-That's it.
+  ```
+  $ git clone https://github.com/codeforamerica/ohana-api-dev-box
+  $ cd ohana-api-dev-box
+  $ vagrant up
+  ```
 
 (If you want to use VMWare Fusion instead of VirtualBox, write `vagrant up --provider=vmware_fusion` instead of `vagrant up` when building the VM for the first time. After that, Vagrant will remember your provider choice, and you won't need to include the `provider` flag again.)
 
-If the base box is not present, `vagrant up` fetches it first. The virtual machine setup itself takes about 2 minutes and 15 seconds on my MacBook Air. After the installation has finished, you can access the virtual machine with
+If the base box is not present, `vagrant up` fetches it first.
+
+After the installation has finished, you can access the virtual machine with the following command:
 
     host $ vagrant ssh
     Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic-pae i686)
     ...
     vagrant@ohana-api-dev-box:~$
 
+`host $` refers to the command prompt on your computer's OS, as opposed to the prompt in the virtual machine.
+
+If you're on Windows, you can opt to access the virtual machine using an ssh client such as Putty, with the following parameters:
+
+```
+Host: 127.0.0.1
+Port: 2222
+Username: vagrant
+Password: vagrant
+```
+
 Port 8080 in the host computer is forwarded to port 8080 in the virtual machine. Thus, applications running in the virtual machine can be accessed via localhost:8080 in the host computer.
 
 ## What's In The Box
-
 * Git
 
 * RVM
@@ -49,10 +62,9 @@ Port 8080 in the host computer is forwarded to port 8080 in the virtual machine.
 
 * Node.js for the asset pipeline
 
-* Redis
+* PhantomJS
 
 ## Recommended Workflow
-
 The recommended workflow is
 
 * edit in the host computer (i.e. your physical computer)
@@ -61,9 +73,10 @@ and
 
 * test within the virtual machine.
 
-### Set up the project
+This workflow is convenient because in the host computer you normally have your editor of choice fine-tuned, Git configured, and SSH keys in place.
 
-Just clone your ohana-api fork into the ohana-api-dev-box directory on the host computer:
+## Set up the project
+Clone your ohana-api fork into the ohana-api-dev-box directory on the host computer:
 
     host $ ls
     README.md   Vagrantfile puppet
@@ -71,43 +84,27 @@ Just clone your ohana-api fork into the ohana-api-dev-box directory on the host 
 
 Vagrant mounts that directory as _/vagrant_ within the virtual machine:
 
+    host $ vagrant ssh
     vagrant@ohana-api-dev-box:~$ ls /vagrant
-    puppet  ohana-api  README.md  Vagrantfile
-
-We are ready to go to edit in the host, and test in the virtual machine.
-
-This workflow is convenient because in the host computer you normally have your editor of choice fine-tuned, Git configured, and SSH keys in place.
+    LICENSE.md  ohana-api  puppet  README.md  Vagrantfile
 
 ### Configure the database
 
-In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`, deleting the `database.yml` file that already exists.
+In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`, overwriting the `database.yml` file that already exists.
 
 ### Bootstrap the ohana-api project in the virtual machine:
 
+    host $ vagrant ssh
     vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
     vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/bootstrap
 
-This step takes about 7 minutes, mostly because it takes a while to install all the gems. Nokogiri is notorious for holding up the bundle process.
+This step can take several minutes, mostly because it takes a while to install all the gems.
 
-On Windows machines, you may run into errors when trying to run `script/boostrap`; if there is a `^M` in the error message it is due to the character Windows uses for line endings. An easy way to fix this is with Sublime Text: open `bootstrap` in  Sublime Text, and from the "View" menu select Line Endings > Unix.
-
-If line endings in Windows were a problem for `script/bootstrap`, you will also have to fix the line endings in these files:
-
-    script/setup_db
-    script/tire
-    script/users
-
-as well as any others that throw the same error.
+On Windows machines, you may run into errors when trying to run `script/boostrap`. If there is a `^M` in the error message, it is due to the character Windows uses for line endings. An easy way to fix this is with [Sublime Text](http://www.sublimetext.com/): open `script/bootstrap`, `script/setup_db`, and `script/users`, and for each file, select `Line Endings > Unix` from the "View" menu.
 
 ### Set up the environment variables
 
-Inside the `config` folder, you will find a file named `application.example.yml`. Rename it to `application.yml` and double check that it is in your `.gitignore` file (it should be by default).
-
-In `config/application.yml`, set the following environment variables so that the tests can pass, and so you can run the [Ohana API Admin](https://github.com/codeforamerica/ohana-api-admin) app locally:
-
-    API_BASE_URL: http://localhost:8080/api/
-    API_BASE_HOST: http://localhost:8080/
-    ADMIN_APP_TOKEN: your_token
+Inside the `config` folder, you will find a file named `application.example.yml`. Copy its contents to a new file in the same directory called `application.yml`.
 
 Verify that you can launch the app:
 
@@ -121,33 +118,19 @@ To see all locations, 30 per page:
 
     http://localhost:8080/api/locations
 
-To go the next page (the page parameter works for all API responses):
-
-    http://localhost:8080/api/locations?page=2
-
-Note that the sample dataset has less than 30 locations, so the second page will be empty.
-
-Search for organizations by keyword and/or location:
+Search for locations by keyword and/or location:
 
     http://localhost:8080/api/search?keyword=food
     http://localhost:8080/api/search?keyword=counseling&location=94403
     http://localhost:8080/api/search?location=redwood city, ca
 
-Search for organizations by languages spoken at the location:
+Search for locations by languages spoken:
 
-    http://localhost:8080/api/search?keyword=food&language=spanish
-
-The language parameter can be used alone:
-
-    http://localhost:8080/api/search?language=tagalog
+    http://localhost:8080/api/search?language=spanish
 
 ### Test the app
 
 Run tests in the virtual machine with this simple command:
-
-    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rspec
-
-If you've just pulled changes from the upstream repo, you might need to update your test database first to run any pending migrations:
 
     vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/test
 
