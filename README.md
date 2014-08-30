@@ -28,7 +28,7 @@ If the base box is not present, `vagrant up` fetches it first.
 After the installation has finished, you can access the virtual machine with the following command:
 
     host $ vagrant ssh
-    Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic-pae i686)
+    Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic x86_64)
     ...
     vagrant@ohana-api-dev-box:~$
 
