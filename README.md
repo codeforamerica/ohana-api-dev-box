@@ -4,7 +4,7 @@
 This project automates the setup of a development environment for working on Ohana API. Use this virtual machine to work on a pull request with everything ready to hack and run the test suites.
 
 ## Requirements
-* [VirtualBox](https://www.virtualbox.org) or [VMWare Fusion](http://www.vmware.com/products/fusion)
+* [VirtualBox](https://www.virtualbox.org)
 
 * [Vagrant 1.1+](http://vagrantup.com) (not a Ruby gem)
 
@@ -21,14 +21,12 @@ This project automates the setup of a development environment for working on Oha
   $ vagrant up
   ```
 
-(If you want to use VMWare Fusion instead of VirtualBox, write `vagrant up --provider=vmware_fusion` instead of `vagrant up` when building the VM for the first time. After that, Vagrant will remember your provider choice, and you won't need to include the `provider` flag again.)
-
 If the base box is not present, `vagrant up` fetches it first.
 
-After the installation has finished, you can access the virtual machine with the following command:
+After the installation has finished (it can take several minutes), you can access the virtual machine with the following command:
 
     host $ vagrant ssh
-    Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic x86_64)
+    Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic-pae i686)
     ...
     vagrant@ohana-api-dev-box:~$
 
@@ -50,7 +48,7 @@ Port 8080 in the host computer is forwarded to port 8080 in the virtual machine.
 
 * RVM
 
-* Ruby 2.1.1 (binary RVM install)
+* Ruby 2.1.3 (binary RVM install)
 
 * Bundler
 
@@ -92,6 +90,10 @@ Vagrant mounts that directory as _/vagrant_ within the virtual machine:
 
 In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`, overwriting the `database.yml` file that already exists.
 
+### Set up the environment variables
+
+Inside the `config` folder, you will find a file named `application.example.yml`. Copy its contents to a new file in the same directory called `application.yml`.
+
 ### Bootstrap the ohana-api project in the virtual machine:
 
     host $ vagrant ssh
@@ -100,11 +102,7 @@ In the `ohana-api` directory, you will find a file within the `config` directory
 
 This step can take several minutes, mostly because it takes a while to install all the gems.
 
-On Windows machines, you may run into errors when trying to run `script/boostrap`. If there is a `^M` in the error message, it is due to the character Windows uses for line endings. An easy way to fix this is with [Sublime Text](http://www.sublimetext.com/): open `script/bootstrap`, `script/setup_db`, and `script/users`, and for each file, select `Line Endings > Unix` from the "View" menu.
-
-### Set up the environment variables
-
-Inside the `config` folder, you will find a file named `application.example.yml`. Copy its contents to a new file in the same directory called `application.yml`.
+On Windows machines, you may run into errors when trying to run `script/boostrap`. If there is a `^M` in the error message, it is due to the character Windows uses for line endings. An easy way to fix this is with [Sublime Text](http://www.sublimetext.com/): open `script/bootstrap`, `script/setup_db`, and `script/restore`, and for each file, select `Line Endings > Unix` from the "View" menu.
 
 Verify that you can launch the app:
 
