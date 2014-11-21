@@ -77,14 +77,8 @@ This workflow is convenient because in the host computer you normally have your 
 Clone your ohana-api fork into the ohana-api-dev-box directory on the host computer:
 
     host $ ls
-    README.md   Vagrantfile puppet
+    LICENSE.md  README.md  Vagrantfile  bootstrap.sh
     host $ git clone https://github.com/<your username>/ohana-api.git
-
-Vagrant mounts that directory as _/vagrant_ within the virtual machine:
-
-    host $ vagrant ssh
-    vagrant@ohana-api-dev-box:~$ ls /vagrant
-    LICENSE.md  ohana-api  puppet  README.md  Vagrantfile
 
 ### Configure the database
 
@@ -134,7 +128,7 @@ Run tests in the virtual machine with this simple command:
 
 ## Virtual Machine Management
 
-When done just log out with `^D` and suspend the virtual machine
+When done just log out with `^D` (or `logout`) and suspend the virtual machine
 
     host $ vagrant suspend
 
