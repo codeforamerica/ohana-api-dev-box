@@ -1,14 +1,20 @@
- # A Virtual Machine for Ohana API Development
+# A Virtual Machine for Ohana API Development.
 
 ## Introduction
 This project automates the setup of a development environment for working on Ohana API. Use this virtual machine to work on a pull request with everything ready to hack and run the test suites.
 
-## Requirements
+## Windows installation
+* [Follow the Windows Installation Guide wiki page](https://github.com/codeforamerica/ohana-api-dev-box/wiki/Windows-ohana-api-dev-box-installation-guide).
+
+## Mac OSX installation
+* Follow the directions below...
+
+### Requirements
 * [VirtualBox](https://www.virtualbox.org)
 
 * [Vagrant 1.1+](http://vagrantup.com) (not a Ruby gem)
 
-## How To Build The Virtual Machine
+### How To Build The Virtual Machine
 1. **Install Vagrant**, which can be [downloaded](http://www.vagrantup.com/downloads.html) from the Vagrant site, which also provides [step-by-step installation instructions](http://docs.vagrantup.com/v2/getting-started/index.html).
 
 2. **Build the VM**
@@ -32,18 +38,9 @@ After the installation has finished (it can take several minutes), you can acces
 
 `host $` refers to the command prompt on your computer's OS, as opposed to the prompt in the virtual machine.
 
-If you're on Windows, you can opt to access the virtual machine using an ssh client such as Putty, with the following parameters:
-
-```
-Host: 127.0.0.1
-Port: 2222
-Username: vagrant
-Password: vagrant
-```
-
 Port 8080 in the host computer is forwarded to port 8080 in the virtual machine. Thus, applications running in the virtual machine can be accessed via localhost:8080 in the host computer.
 
-## What's In The Box
+### What's In The Box
 * Git
 
 * RVM
@@ -62,7 +59,7 @@ Port 8080 in the host computer is forwarded to port 8080 in the virtual machine.
 
 * PhantomJS
 
-## Recommended Workflow
+### Recommended Workflow
 The recommended workflow is
 
 * edit in the host computer (i.e. your physical computer)
@@ -73,30 +70,28 @@ and
 
 This workflow is convenient because in the host computer you normally have your editor of choice fine-tuned, Git configured, and SSH keys in place.
 
-## Set up the project
+### Set up the project
 Clone your ohana-api fork into the ohana-api-dev-box directory on the host computer:
 
     host $ ls
     LICENSE.md  README.md  Vagrantfile  bootstrap.sh
     host $ git clone https://github.com/<your username>/ohana-api.git
 
-### Configure the database
+#### Configure the database
 
 In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`, overwriting the `database.yml` file that already exists.
 
-### Set up the environment variables
+#### Set up the environment variables
 
 Inside the `config` folder, you will find a file named `application.example.yml`. Copy its contents to a new file in the same directory called `application.yml`.
 
-### Bootstrap the ohana-api project in the virtual machine:
+#### Bootstrap the ohana-api project in the virtual machine:
 
     host $ vagrant ssh
     vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
     vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/bootstrap
 
 This step can take several minutes, mostly because it takes a while to install all the gems.
-
-On Windows machines, you may run into errors when trying to run `script/boostrap`. If there is a `^M` in the error message, it is due to the character Windows uses for line endings. An easy way to fix this is with [Sublime Text](http://www.sublimetext.com/): open `script/bootstrap`, `script/setup_db`, and `script/restore`, and for each file, select `Line Endings > Unix` from the "View" menu.
 
 Verify that you can launch the app:
 
@@ -105,7 +100,7 @@ Verify that you can launch the app:
 You should now be able to access the app on the host machine at
 http://localhost:8080
 
-### Verify the app is returning JSON
+#### Verify the app is returning JSON
 To see all locations, 30 per page:
 
     http://localhost:8080/api/locations
@@ -120,7 +115,7 @@ Search for locations by languages spoken:
 
     http://localhost:8080/api/search?language=spanish
 
-### Test the app
+#### Test the app
 
 Run tests in the virtual machine with this simple command:
 
