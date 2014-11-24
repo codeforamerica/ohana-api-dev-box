@@ -1,4 +1,4 @@
-# A Virtual Machine for Ohana API Development.
+# A Virtual Machine for Ohana API Development
 
 ## Introduction
 This project automates the setup of a development environment for working on Ohana API. Use this virtual machine to work on a pull request with everything ready to hack and run the test suites.
