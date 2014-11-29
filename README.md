@@ -75,7 +75,7 @@ Clone your ohana-api fork into the ohana-api-dev-box directory on the host compu
 
     host $ ls
     LICENSE.md  README.md  Vagrantfile  bootstrap.sh
-    host $ git clone https://github.com/<your username>/ohana-api.git
+    host $ git clone https://github.com/<your GitHub username>/ohana-api.git
 
 #### Configure the database
 
