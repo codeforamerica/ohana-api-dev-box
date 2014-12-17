@@ -4,7 +4,7 @@
 This project automates the setup of a development environment for working on Ohana API. Use this virtual machine to work on a pull request with everything ready to hack and run the test suites.
 
 ## Windows installation
-* [Follow the Windows Installation Guide wiki page](https://github.com/codeforamerica/ohana-api-dev-box/wiki/Windows-ohana-api-dev-box-installation-guide).
+* [Follow the Windows Installation Guide wiki page](https://github.com/codeforamerica/ohana-api-dev-box/wiki/Ohana-API-virtual-machine-installation-guide-for-Windows).
 
 ## Mac OSX installation
 * Follow the directions below...
@@ -15,9 +15,11 @@ This project automates the setup of a development environment for working on Oha
 * [Vagrant 1.1+](http://vagrantup.com) (not a Ruby gem)
 
 ### How To Build The Virtual Machine
-1. **Install Vagrant**, which can be [downloaded](http://www.vagrantup.com/downloads.html) from the Vagrant site, which also provides [step-by-step installation instructions](http://docs.vagrantup.com/v2/getting-started/index.html).
+1. **Install VirtualBox for OS X**, which can be [downloaded](https://www.virtualbox.org/wiki/Downloads) from the VirtualBox site.
 
-2. **Build the VM**
+2. **Install Vagrant**, which can be [downloaded](http://www.vagrantup.com/downloads.html) from the Vagrant site, which also provides [step-by-step installation instructions](http://docs.vagrantup.com/v2/getting-started/index.html).
+
+3. **Build the VM**
 
   In the directory you want to work in, enter the following:
 
