@@ -45,7 +45,7 @@ Port 8080 in the host computer is forwarded to port 8080 in the virtual machine.
 
 * RVM
 
-* Ruby 2.1.3 (binary RVM install)
+* Ruby 2.1.5 (binary RVM install)
 
 * Bundler
 
