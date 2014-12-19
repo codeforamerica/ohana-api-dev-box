@@ -176,6 +176,7 @@ running by pressing ctrl-c. Then press ctrl-d to log out.
 2. Halt and launch the VM with rsync
  ```
  vagrant halt
+ vagrant up
  vagrant rsync-auto
  ```
 
