@@ -155,42 +155,52 @@ Please check the [Vagrant documentation](http://docs.vagrantup.com/v2/) for more
 
 ## Faster test suites
 
-The default mechanism for sharing folders is convenient and works out the box in
-all Vagrant versions, but there are a couple of alternatives that are more
-performant.
+The default mechanism for sharing folders is convenient and works out of the
+box in all Vagrant versions, but there are a couple of alternatives that are
+more performant.
 
 ### rsync
 
-Vagrant 1.5 implements a [sharing mechanism based on rsync](https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html)
-that dramatically improves read/write because files are actually stored in the
-guest. Just throw
+Vagrant implements a sharing mechanism based on rsync that dramatically
+improves read/write because files are actually stored in the guest.
 
-    config.vm.synced_folder '.', '/vagrant', type: 'rsync'
+1. In a text editor, open `Vagrantfile`, which can be found in the root of
+the `ohana-api-dev-box` directory you cloned earlier.
 
-to the _Vagrantfile_ and either rsync manually with
+2. Uncomment line 28 and save the file.
 
-    vagrant rsync
+#### Restart the virtual machine
+1. If you're already logged in to the VM, stop the Rails server if it's
+running by pressing ctrl-c. Then press ctrl-d to log out.
 
-or run
+2. Halt and launch the VM with rsync
+ ```
+ vagrant halt
+ vagrant rsync-auto
+ ```
 
-    vagrant rsync-auto
+3. Log in to the VM in a new Shell window or tab:
+ ```
+ vagrant ssh
+ ```
 
-for automatic syncs. See the post linked above for details.
+4. Launch Ohana API
+ ```
+ vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
+ vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rails s -p 8080
+ ```
 
 ### NFS
 
 If you're using Mac OS X or Linux you can increase the speed of the test suite with Vagrant's NFS synced folders.
 
-With an NFS server installed (already installed on Mac OS X), add the following to the Vagrantfile:
+With an NFS server installed (already installed on Mac OS X), uncomment line
+28 of the Vagrantfile (which can be found in the root  of the
+`ohana-api-dev-box` directory you cloned earlier) and replace `type: 'rsync'`
+with `type: 'nfs'`.
 
-    config.vm.synced_folder '.', '/vagrant', type: 'nfs'
-    config.vm.network 'private_network', ip: '192.168.50.4' # ensure this is available
-
-Then
-
-    host $ vagrant up
-
-Please check the Vagrant documentation on [NFS synced folders](http://docs.vagrantup.com/v2/synced-folders/nfs.html) for more information.
+You'll also need to configure a private network using either DHCP or a static IP.
+Please read the Vagrant documentation on [private networks](http://docs.vagrantup.com/v2/networking/private_network.html) and [NFS synced folders](http://docs.vagrantup.com/v2/synced-folders/nfs.html) for more information.
 
 ## License
 
