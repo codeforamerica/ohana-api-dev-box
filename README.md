@@ -47,7 +47,7 @@ Port 8080 in the host computer is forwarded to port 8080 in the virtual machine.
 
 * RVM
 
-* Ruby 2.1.5 (binary RVM install)
+* Ruby 2.2.1 (binary RVM install)
 
 * Bundler
 
@@ -79,25 +79,18 @@ Clone your ohana-api fork into the ohana-api-dev-box directory on the host compu
     LICENSE.md  README.md  Vagrantfile  bootstrap.sh
     host $ git clone https://github.com/<your GitHub username>/ohana-api.git
 
-#### Configure the database
-
-In the `ohana-api` directory, you will find a file within the `config` directory called `database.vagrant.yml`. On the host machine, rename it to `database.yml`, overwriting the `database.yml` file that already exists.
-
-#### Set up the environment variables
-
-Inside the `config` folder, you will find a file named `application.example.yml`. Copy its contents to a new file in the same directory called `application.yml`.
-
 #### Bootstrap the ohana-api project in the virtual machine:
 
     host $ vagrant ssh
     vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
-    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ script/bootstrap
+    vagrant@ohana-api-dev-box:~$ cp config/database.vagrant.yml config/database.yml
+    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ bin/setup
 
 This step can take several minutes, mostly because it takes a while to install all the gems.
 
 Verify that you can launch the app:
 
-    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rails s -p 8080
+    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ puma -p 8080
 
 You should now be able to access the app on the host machine at
 http://localhost:8080
@@ -188,7 +181,7 @@ running by pressing ctrl-c. Then press ctrl-d to log out.
 4. Launch Ohana API
  ```
  vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
- vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rails s -p 8080
+ vagrant@ohana-api-dev-box:/vagrant/ohana-api$ puma -p 8080
  ```
 
 ### NFS
