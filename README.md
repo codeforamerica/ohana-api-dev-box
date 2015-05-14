@@ -90,7 +90,7 @@ This step can take several minutes, mostly because it takes a while to install a
 
 Verify that you can launch the app:
 
-    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ puma -p 8080
+    vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rails s -p 8080 -b 0.0.0.0
 
 You should now be able to access the app on the host machine at
 http://localhost:8080
@@ -181,7 +181,7 @@ running by pressing ctrl-c. Then press ctrl-d to log out.
 4. Launch Ohana API
  ```
  vagrant@ohana-api-dev-box:~$ cd /vagrant/ohana-api
- vagrant@ohana-api-dev-box:/vagrant/ohana-api$ puma -p 8080
+ vagrant@ohana-api-dev-box:/vagrant/ohana-api$ rails s -p 8080 -b 0.0.0.0
  ```
 
 ### NFS
