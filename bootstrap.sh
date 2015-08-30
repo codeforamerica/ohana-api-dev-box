@@ -19,9 +19,9 @@ sudo -u vagrant -H bash -l -c 'gpg --keyserver hkp://keys.gnupg.net \
 
 source /home/vagrant/.rvm/scripts/rvm
 
-echo installing Ruby 2.2.1
-sudo -u vagrant -H bash -l -c '/home/vagrant/.rvm/bin/rvm install ruby-2.2.1 \
-  --quiet-curl --autolibs=enabled && rvm alias create default 2.2.1'
+echo installing Ruby 2.2.2
+sudo -u vagrant -H bash -l -c '/home/vagrant/.rvm/bin/rvm install ruby-2.2.2 \
+  --quiet-curl --autolibs=enabled && rvm alias create default 2.2.2'
 
 echo installing Bundler
 sudo -u vagrant -H bash -l -c 'gem install bundler -N'

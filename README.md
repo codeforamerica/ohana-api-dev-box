@@ -12,7 +12,7 @@ This project automates the setup of a development environment for working on Oha
 ### Requirements
 * [VirtualBox](https://www.virtualbox.org)
 
-* [Vagrant 1.1+](http://vagrantup.com) (not a Ruby gem)
+* [Vagrant 1.7.4+](http://vagrantup.com) (not a Ruby gem)
 
 ### How To Build The Virtual Machine
 1. **Install VirtualBox for OS X**, which can be [downloaded](https://www.virtualbox.org/wiki/Downloads) from the VirtualBox site.
@@ -47,7 +47,7 @@ Port 8080 in the host computer is forwarded to port 8080 in the virtual machine.
 
 * RVM
 
-* Ruby 2.2.1 (binary RVM install)
+* Ruby 2.2.2 (binary RVM install)
 
 * Bundler
 
