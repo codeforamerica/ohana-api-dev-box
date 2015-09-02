@@ -23,7 +23,7 @@ Vagrant.configure('2') do |config|
   #
   config.vm.provision :shell, path: 'bootstrap.sh', keep_color: true
 
-  # Uncomment line 28 to use rsync. If you're on Windows, read the
+  # Uncomment line 29 to use rsync. If you're on Windows, read the
   # Wiki for rsync installation instructions:
   # https://github.com/codeforamerica/ohana-api-dev-box/wiki/
   # config.vm.synced_folder '.', '/vagrant', type: 'rsync', rsync__exclude: '.git/'
