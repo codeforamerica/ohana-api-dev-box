@@ -160,7 +160,7 @@ improves read/write because files are actually stored in the guest.
 1. In a text editor, open `Vagrantfile`, which can be found in the root of
 the `ohana-api-dev-box` directory you cloned earlier.
 
-2. Uncomment line 28 and save the file.
+2. Uncomment line 29 and save the file.
 
 #### Restart the virtual machine
 1. If you're already logged in to the VM, stop the Rails server if it's
@@ -189,7 +189,7 @@ running by pressing ctrl-c. Then press ctrl-d to log out.
 If you're using Mac OS X or Linux you can increase the speed of the test suite with Vagrant's NFS synced folders.
 
 With an NFS server installed (already installed on Mac OS X), uncomment line
-28 of the Vagrantfile (which can be found in the root  of the
+29 of the Vagrantfile (which can be found in the root  of the
 `ohana-api-dev-box` directory you cloned earlier) and replace `type: 'rsync'`
 with `type: 'nfs'`.
 
